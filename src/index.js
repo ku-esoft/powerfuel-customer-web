@@ -10,12 +10,17 @@ import "./assets/styles/app.scss";
 
 const theme = createTheme({
   palette: {
+    mode: "dark",
+    background: {
+      default: "#000000",
+      paper: "transparent",
+    },
     primary: {
-      main: "#2ab5bf",
+      main: "#D32F2F",
       contrastText: "#ffffff",
     },
     secondary: {
-      main: "#69c464",
+      main: "#21203F",
       contrastText: "#ffffff",
     },
     success: {
@@ -35,7 +40,7 @@ const theme = createTheme({
   },
   typography: {
     fontFamily: "Lato, sans-serif",
-    fontSize: 13,
+    fontSize: 14,
   },
   components: {
     MuiAppBar: {

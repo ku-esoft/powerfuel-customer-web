@@ -5,6 +5,11 @@ import { history } from "./helpers";
 import { alertActions } from "./actions";
 import Paper from "@mui/material/Paper";
 
+// auth
+import Auth from "./containers/Auth/Auth";
+import Login from "./containers/Auth/Login/Login";
+import Register from "./containers/Auth/Register/Register";
+
 // protected route
 import ProtectedRoute from "./components/common/auth/ProtectedRoute/ProtectedRoute.component";
 
@@ -31,10 +36,6 @@ import Token from "./containers/Token";
 // 404
 import NotFound from "./containers/misc/NotFound/NotFound";
 
-// auth -----------------------------------------------------------------------------------------------------------------
-// import Auth from "./containers/Auth/Auth";
-// import Login from "./containers/Auth/Login/Login";
-
 const App = (props) => {
   const dispatch = useDispatch();
 
@@ -46,6 +47,12 @@ const App = (props) => {
     <Paper className="App" elevation={0}>
       <BrowserRouter>
         <Routes>
+          {/* Auth */}
+          <Route path="auth" element={<Auth />}>
+            <Route path="login" element={<Login />} />
+            <Route path="register" element={<Register />} />
+          </Route>
+
           <Route path="/" element={<ProtectedRoute />}>
             {/* dashboard */}
             <Route path="/dashboard" element={<Dashboard />} />

@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { userActions } from "../../../../actions";
-import { Link as RouterLink, useNavigate } from "react-router-dom";
+import { Link as RouterLink, useNavigate, useLocation } from "react-router-dom";
 import { styled, alpha } from "@mui/material/styles";
 import {
   AppBar,
@@ -25,6 +25,7 @@ import SearchIcon from "@mui/icons-material/Search";
 const Settings = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
   const handleOpenUserMenu = (event) => {
@@ -89,7 +90,30 @@ const Settings = () => {
 
 const Header = (props) => {
   const { open, toggleDrawer, theme, drawerWidth } = props;
-  // const settings = ["Profile", "Account", "Dashboard", "Logout"];
+  const location = useLocation();
+  let pageTitle = "";
+
+  switch (location?.pathname) {
+    case "/dashboard":
+      pageTitle = "Dashboard";
+      break;
+
+    case "/reserve":
+      pageTitle = "Reserve Fuel";
+      break;
+
+    case "/reserve/success":
+      pageTitle = "Reserve Fuel";
+      break;
+
+    case "/token":
+      pageTitle = "My Token";
+      break;
+
+    default:
+      pageTitle = location?.pathname.replace("/", "");
+      break;
+  }
 
   const drawerOpen = {
     marginLeft: drawerWidth,
@@ -142,23 +166,15 @@ const Header = (props) => {
           <MenuTwoToneIcon />
         </IconButton>
 
-        <Search>
-          <SearchIconWrapper>
-            <SearchIcon />
-          </SearchIconWrapper>
-          <StyledInputBase
-            placeholder="Search…"
-            inputProps={{ "aria-label": "search" }}
-          />
-        </Search>
-
         <Typography
           component="h1"
           variant="h6"
           color="inherit"
           noWrap
           sx={{ flexGrow: 1 }}
-        ></Typography>
+        >
+          {pageTitle}
+        </Typography>
 
         <Stack
           direction="row"
@@ -166,18 +182,6 @@ const Header = (props) => {
           alignItems="center"
           spacing={1}
         >
-          <IconButton color="inherit">
-            <Badge badgeContent={23} color="secondary">
-              <NotificationsNoneTwoToneIcon />
-            </Badge>
-          </IconButton>
-
-          <IconButton color="inherit">
-            <Badge badgeContent={2} color="secondary">
-              <EmailTwoToneIcon />
-            </Badge>
-          </IconButton>
-
           <Settings />
         </Stack>
       </Toolbar>
@@ -186,52 +190,6 @@ const Header = (props) => {
 };
 
 export default Header;
-
-const Search = styled("div")(({ theme }) => ({
-  position: "relative",
-  borderRadius: theme.shape.borderRadius,
-  transition: "all 0.3s ease-in-out",
-  color: "#232323",
-  backgroundColor: alpha(theme.palette.common.black, 0.05),
-  "&:hover": {
-    backgroundColor: alpha(theme.palette.common.black, 0.15),
-  },
-  "&:focus": {
-    backgroundColor: alpha(theme.palette.common.black, 0.15),
-  },
-  marginRight: theme.spacing(2),
-  marginLeft: 0,
-  width: "100%",
-  [theme.breakpoints.up("sm")]: {
-    // marginLeft: theme.spacing(3),
-    width: "auto",
-  },
-}));
-
-const SearchIconWrapper = styled("div")(({ theme }) => ({
-  padding: theme.spacing(0, 2),
-  height: "100%",
-  position: "absolute",
-  pointerEvents: "none",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-}));
-
-const StyledInputBase = styled(InputBase)(({ theme }) => ({
-  color: "inherit",
-  "& .MuiInputBase-input": {
-    padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
-    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-    transition: theme.transitions.create("width"),
-    fontSize: "0.85rem",
-    width: "100%",
-    [theme.breakpoints.up("md")]: {
-      width: "20ch",
-    },
-  },
-}));
 
 const StyledBadge = styled(Badge)(({ theme }) => ({
   "& .MuiBadge-badge": {

@@ -12,7 +12,6 @@ import MuiDrawer from "@mui/material/Drawer";
 import ChevronLeftTwoToneIcon from "@mui/icons-material/ChevronLeftTwoTone";
 import logo from "./../../../../assets/images/logos/logo_black.svg";
 import Navigation from "./Naviagtion/Navigation.component";
-import cardImage from "./../../../../assets/imges/backgrounds/bg_auth_card_img.jpg";
 
 const Sidebar = (props) => {
   const { open, toggleDrawer, theme, drawerWidth } = props;
@@ -32,7 +31,7 @@ const Sidebar = (props) => {
           justifyContent="space-between"
           sx={{ width: "100%", py: 2 }}
         >
-          <Box>
+          <Box sx={{ width: "100%", pt: 1 }}>
             <img src={logo} alt="logo" style={{ filter: "Invert(1)" }} />
           </Box>
           <IconButton onClick={toggleDrawer}>
@@ -44,19 +43,6 @@ const Sidebar = (props) => {
       <Divider light sx={{ mb: 1, borderColor: "#fff", opacity: 0.1 }} />
 
       <Navigation />
-
-      <Box
-        sx={{
-          background: `no-repeat url('${cardImage}') scroll bottom center / cover`,
-          position: "absolute",
-          left: "-20%",
-          right: "-20%",
-          top: "-20%",
-          bottom: "-20%",
-          filter: "blur(30px) brightness(50%)",
-          zIndex: -1,
-        }}
-      />
     </Drawer>
   );
 };
@@ -71,6 +57,7 @@ const Drawer = styled(MuiDrawer, {
     whiteSpace: "nowrap",
     width: 240,
     overflow: "hidden",
+    backgroundColor: "transparent",
     transition: theme.transitions.create("width", {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.enteringScreen,

@@ -5,7 +5,7 @@ import NavigateNextTwoToneIcon from "@mui/icons-material/NavigateNextTwoTone";
 import styles from "./Intro..module.scss";
 
 const Intro = (props) => {
-  const { pageTitle, pageTitleShort, breadcrumbs, additionalWidgets } = props;
+  const { pageTitle, description, breadcrumbs, additionalWidgets } = props;
 
   return (
     <Box
@@ -48,6 +48,14 @@ const Intro = (props) => {
 
         <Grid sx={{ flex: 1 }}>{additionalWidgets}</Grid>
       </Grid>
+
+      {description && (
+        <Grid container>
+          <Grid item xs={12}>
+            <Typography>{description}</Typography>
+          </Grid>
+        </Grid>
+      )}
     </Box>
   );
 };

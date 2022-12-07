@@ -1,14 +1,6 @@
 import React, { useMemo, forwardRef } from "react";
 import { NavLink as RouterLink } from "react-router-dom";
-import {
-  List,
-  ListItem,
-  ListItemButton,
-  ListItemText,
-  Collapse,
-  Divider,
-} from "@mui/material";
-import { ExpandLess, ExpandMore } from "@mui/icons-material";
+import { List, ListItem, ListItemText, Divider } from "@mui/material";
 import styles from "./Navigation.module.scss";
 
 const ListItemLink = (props) => {
@@ -25,7 +17,6 @@ const ListItemLink = (props) => {
   return (
     <li style={{ paddingLeft: mode === "sub" ? "1rem" : 0 }}>
       <ListItem button component={renderLink}>
-        {/* {icon ? <SvgIcon>{icon}</SvgIcon> : null} */}
         <ListItemText primary={primary} className={styles.navlink} />
       </ListItem>
     </li>
@@ -33,12 +24,6 @@ const ListItemLink = (props) => {
 };
 
 const Navigation = () => {
-  const [open, setOpen] = React.useState(false);
-
-  const handleClick = () => {
-    setOpen(!open);
-  };
-
   return (
     <List
       sx={{ width: "100%", maxWidth: 360, color: "#fff" }}
@@ -46,75 +31,21 @@ const Navigation = () => {
       aria-labelledby="nested-list-subheader"
       className={styles.navlist}
     >
-      <ListItemLink to="/admin/dashboard" primary="Dashboard" />
+      <ListItemLink to="/token" primary="My Token" />
 
-      <ListItemLink to="/admin/quotations" primary="Quotations" />
+      <Divider sx={{ my: 2 }} />
 
-      <ListItemLink to="/admin/sales-orders" primary="Sales Orders" />
+      <ListItemLink to="/dashboard" primary="Dashboard" />
 
-      <ListItemLink to="/admin/production-orders" primary="Production Orders" />
+      <ListItemLink to="/schedule" primary="Delivery Schedule" />
 
-      <ListItemLink to="" primary="Invoices" />
+      <ListItemLink to="/reserve" primary="Reserve Fuel" />
 
-      <ListItemLink to="" primary="Payment Management" />
+      <ListItemLink to="/history" primary="Reservation History" />
 
-      <ListItemLink to="/admin/pricebook" primary="Pricebook" />
+      <Divider sx={{ my: 2 }} />
 
-      <ListItemLink
-        to="/admin/parameter-management"
-        primary="Parameter Management"
-      />
-
-      <ListItemButton onClick={handleClick}>
-        <ListItemText primary="User Management" />
-        {open ? <ExpandLess /> : <ExpandMore />}
-      </ListItemButton>
-      <Collapse in={open} timeout="auto" unmountOnExit>
-        <List component="div" disablePadding>
-          <ListItemLink
-            mode="sub"
-            to="/admin/user-management/users"
-            primary="Users"
-          />
-          <ListItemLink
-            mode="sub"
-            to="/admin/user-management/roles"
-            primary="Roles"
-          />
-        </List>
-      </Collapse>
-
-      {/* <ListItemLink to="/admin/user-management" primary="User Management" /> */}
-
-      <ListItemLink
-        to="/admin/organization-management"
-        primary="Organization Management"
-      />
-
-      <Divider />
-
-      <ListItemLink to="/store" primary="Customer Store" />
-
-      {/* <ListItemButton>
-        <ListItemText primary="Reports" />
-      </ListItemButton> */}
-      {/* <ListItemButton onClick={handleClick}>
-        <ListItemText primary="Settings" />
-        {open ? <ExpandLess /> : <ExpandMore />}
-      </ListItemButton>
-      <Collapse in={open} timeout="auto" unmountOnExit>
-        <List component="div" disablePadding>
-          <ListItemButton sx={{ pl: 4 }}>
-            <ListItemText primary="Profile" />
-          </ListItemButton>
-          <ListItemButton sx={{ pl: 4 }}>
-            <ListItemText primary="Billing" />
-          </ListItemButton>
-          <ListItemButton sx={{ pl: 4 }}>
-            <ListItemText primary="Shipping" />
-          </ListItemButton>
-        </List>
-      </Collapse> */}
+      <ListItemLink to="/profile" primary="My Profile" />
     </List>
   );
 };
