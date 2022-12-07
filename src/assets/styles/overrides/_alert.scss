@@ -1,0 +1,27 @@
+.alert-info {
+  background: rgba(#fff, 0.9) !important;
+  color: $secondary !important;
+  letter-spacing: 0 !important;
+
+  svg {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    color: $secondary !important;
+  }
+}
+
+.alert-special {
+  background: $secondary !important;
+  color: #fff !important;
+  line-height: 1.5 !important;
+  letter-spacing: 0 !important;
+
+  svg {
+    display: none;
+  }
+
+  .highlight {
+    color: $primary !important;
+  }
+}

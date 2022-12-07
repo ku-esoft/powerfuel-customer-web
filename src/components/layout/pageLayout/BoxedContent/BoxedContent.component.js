@@ -2,20 +2,29 @@ import React from "react";
 import { Paper, Grid, Typography } from "@mui/material";
 
 const BoxedContent = (props) => {
-  const { title, subtitle, description, children } = props;
+  const {
+    title,
+    subtitle,
+    description,
+    dense,
+    moderate,
+    backgroundColor,
+    children,
+  } = props;
 
   return (
     <Paper
-      elevation={2}
+      elevation={dense ? 0 : 2}
       sx={{
         width: "100%",
         p: {
-          xs: 2,
-          md: 4,
+          xs: dense ? 0 : moderate ? 4 : 2,
+          md: dense ? 0 : 4,
         },
+        backgroundColor: backgroundColor ? backgroundColor : "",
       }}
     >
-      <Grid container maxWidth={"xl"} spacing={2}>
+      <Grid container maxWidth={"xl"} spacing={0}>
         <Grid
           item
           xs={12}

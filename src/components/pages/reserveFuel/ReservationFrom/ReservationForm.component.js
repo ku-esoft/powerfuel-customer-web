@@ -266,9 +266,11 @@ const ReservationForm = (props) => {
               </Grid>
 
               <Grid item xs={12} md={6}>
-                <Alert severity="warning">
+                <Alert severity="warning" className="alert-special">
                   No. of PETROL litres available to reserve on 01-12-2022:
-                  <strong>1687 LITRES </strong>
+                  <br />
+                  <br />
+                  <strong className="highlight">1687 LITRES </strong>
                 </Alert>
               </Grid>
 
@@ -307,14 +309,14 @@ const ReservationForm = (props) => {
                       startIcon={<ArrowBackIcon size="small" />}
                       sx={{ textTransform: "none" }}
                     >
-                      Back to {title}
+                      Back
                     </Button>
                   </Link>
 
                   <span style={{ flex: 1 }}>&nbsp;</span>
 
                   <LoadingButton
-                    color="secondary"
+                    color="primary"
                     variant="contained"
                     fullWidth
                     type="submit"

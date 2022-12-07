@@ -29,16 +29,18 @@ const ReserveFuel = () => {
       />
 
       <Content>
-        <Grid container spacing="2">
+        <Grid container spacing={2}>
           <Grid item xs={12}>
-            <BoxedContent title="" subtitle="" description="">
-              <Alert severity="info">
+            <BoxedContent title="" subtitle="" description="" dense={true}>
+              <Alert severity="info" className="alert-info">
                 Please make sure to check delivery schedule before making a fuel
                 request
               </Alert>
             </BoxedContent>
+          </Grid>
 
-            <BoxedContent>
+          <Grid item xs={12}>
+            <BoxedContent dense={true}>
               <ReservationForm />
             </BoxedContent>
           </Grid>

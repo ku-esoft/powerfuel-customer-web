@@ -25,6 +25,11 @@ body {
   z-index: 2;
 }
 
+header {
+  background: transparent !important;
+  border-bottom: 1px solid rgba(#fff, 0.1);
+}
+
 @media (min-width: 992px) {
   body {
     &::before {

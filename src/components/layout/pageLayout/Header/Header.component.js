@@ -19,7 +19,7 @@ import {
 } from "@mui/material";
 import EmailTwoToneIcon from "@mui/icons-material/EmailTwoTone";
 import NotificationsNoneTwoToneIcon from "@mui/icons-material/NotificationsNoneTwoTone";
-import MenuTwoToneIcon from "@mui/icons-material/MenuTwoTone";
+import SegmentIcon from "@mui/icons-material/Segment";
 import SearchIcon from "@mui/icons-material/Search";
 
 const Settings = () => {
@@ -47,10 +47,7 @@ const Settings = () => {
           sx={{ position: "relative", top: "-2px", paddingLeft: "5px" }}
         >
           <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-            <Avatar
-              alt="User prfile pic"
-              src="https://i.ibb.co/8M2wKj3/random-user-31.jpg"
-            />
+            <Avatar />
           </IconButton>
         </StyledBadge>
       </Tooltip>
@@ -110,6 +107,10 @@ const Header = (props) => {
       pageTitle = "My Token";
       break;
 
+    case "/profile":
+      pageTitle = "My profile";
+      break;
+
     default:
       pageTitle = location?.pathname.replace("/", "");
       break;
@@ -146,8 +147,9 @@ const Header = (props) => {
       <Toolbar
         sx={{
           pr: "24px", // keep right padding when drawer closed
-          pt: 3.5,
-          pb: 3.25,
+          pt: 2.5,
+          pb: 2.25,
+          background: "transparent",
         }}
         elevation={0}
       >
@@ -163,15 +165,20 @@ const Header = (props) => {
             ...(open && { display: "none" }),
           }}
         >
-          <MenuTwoToneIcon />
+          <SegmentIcon sx={{ transform: "scaleX(-1)" }} />
         </IconButton>
 
         <Typography
           component="h1"
-          variant="h6"
           color="inherit"
           noWrap
-          sx={{ flexGrow: 1 }}
+          sx={{
+            flexGrow: 1,
+            textTransform: "uppercase",
+            fontSize: "1.2rem",
+            position: "relative",
+            top: "-0.1rem",
+          }}
         >
           {pageTitle}
         </Typography>
@@ -196,17 +203,6 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
     backgroundColor: "#44b700",
     color: "#44b700",
     boxShadow: `0 0 0 2px ${theme.palette.background.paper}`,
-    // "&::after": {
-    //   position: "absolute",
-    //   top: 0,
-    //   left: 0,
-    //   width: "100%",
-    //   height: "100%",
-    //   borderRadius: "50%",
-    //   animation: "ripple 1.2s infinite ease-in-out",
-    //   border: "1px solid currentColor",
-    //   content: '""',
-    // },
   },
   "@keyframes ripple": {
     "0%": {

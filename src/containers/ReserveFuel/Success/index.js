@@ -14,58 +14,61 @@ import {
   Button,
   SvgIcon,
   Alert,
+  Divider,
 } from "@mui/material";
-import QRCode from "react-qr-code";
+
 import Intro from "../../../components/layout/pageLayout/Intro/Intro.component";
 import Content from "../../../components/layout/pageLayout/Content/Content.component";
 import BoxedContent from "../../../components/layout/pageLayout/BoxedContent/BoxedContent.component";
+import QRToken from "../../../components/common/token/QRToken/QRToken.component";
 import { ArrowBack } from "@mui/icons-material";
 
 const ReserveFuelSuccess = () => {
   return (
     <>
-      <Intro pageTitle="" pageTitleShort="" />
+      <Intro pageTitle="Success!" pageTitleShort="" />
 
       <Content>
         <Grid container spacing="2">
           <Grid item xs={12}>
-            <BoxedContent title="Success" subtitle="" description="">
+            <BoxedContent title="" subtitle="" description="" dense={true}>
               <Typography>
-                You’ve successfully reserved 20 LITRES from the RATMALANA fuel
+                You’ve successfully reserved{" "}
+                <strong style={{ color: "#d32f2f" }}>20 LITRES</strong> from the{" "}
+                <strong style={{ color: "#d32f2f" }}>RATMALANA</strong> fuel
                 station. Please produce this token when you are recieving fuel
               </Typography>
             </BoxedContent>
 
-            <BoxedContent title="" subtitle="" description="">
-              <Alert severity="info">
+            <Divider sx={{ height: "2.4rem" }} />
+
+            <BoxedContent title="" subtitle="" description="" dense>
+              <Alert severity="info" className="alert-info">
                 This token is only valid on 01/12/2022 from 8.30 AM to 12.30 PM
               </Alert>
             </BoxedContent>
 
-            <BoxedContent title="" subtitle="" description="">
-              <div
-                style={{
-                  height: "auto",
-                  margin: "0 auto",
-                  maxWidth: 256,
-                  width: "100%",
-                }}
-              >
-                <QRCode
-                  size={256}
-                  style={{ height: "auto", maxWidth: "100%", width: "100%" }}
-                  value={"powerfuel"}
-                  viewBox={`0 0 256 256`}
-                />
-              </div>
+            <Divider sx={{ height: "2.4rem" }} />
+
+            <BoxedContent
+              title=""
+              subtitle=""
+              description=""
+              backgroundColor="#21203f"
+              moderate
+            >
+              <QRToken value="powerfuel" />
             </BoxedContent>
 
-            <BoxedContent>
+            <Divider sx={{ height: "1.2rem", borderWidth: 0 }} />
+
+            <BoxedContent dense>
               <Button
                 fullWidth
                 variant="outlined"
+                color="default"
                 component={RouterLink}
-                to="/reserve"
+                to="/dashboard"
                 startIcon={<ArrowBack />}
               >
                 View Schedule
