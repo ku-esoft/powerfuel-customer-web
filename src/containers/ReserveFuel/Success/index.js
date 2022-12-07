@@ -57,7 +57,7 @@ const ReserveFuelSuccess = () => {
               backgroundColor="#21203f"
               moderate
             >
-              <QRToken value="powerfuel" />
+              <QRToken value="CBK2011---01/12/2022---0900TO1500---RATMALANA" />
             </BoxedContent>
 
             <Divider sx={{ height: "1.2rem", borderWidth: 0 }} />

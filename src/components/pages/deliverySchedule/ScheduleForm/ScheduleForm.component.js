@@ -1,5 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import { TimePicker } from "@mui/x-date-pickers/TimePicker";
 // import {
 //   organizationActions,
 //   countryActions,
@@ -31,6 +35,7 @@ import { FieldArray, Form, Formik, getIn } from "formik";
 import * as Yup from "yup";
 import { Link } from "react-router-dom";
 import styles from "./ScheduleForm.module.scss";
+import { useNavigate } from "react-router-dom";
 
 const ScheduleForm = (props) => {
   const {
@@ -43,6 +48,7 @@ const ScheduleForm = (props) => {
   } = props;
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const paramState = useSelector((state) => state.organizations);
   const paymentTermState = useSelector((state) => state.paymentTerms);
   const countryState = useSelector((state) => state.countries);
@@ -58,7 +64,7 @@ const ScheduleForm = (props) => {
 
   const validationSchema = Yup.object({
     outlet: Yup.string().required("Fuel Station is required"),
-    startDate: Yup.string().email().required("Start Date is required"),
+    startDate: Yup.string().required("Start Date is required"),
     endDate: Yup.string().required("End Date is required"),
   });
 
@@ -118,6 +124,7 @@ const ScheduleForm = (props) => {
   }, [paramState, handleSuccessDialog, alertState, handleErrorAlert]);
 
   const handleSubmit = (values) => {
+    navigate("/schedule/details");
     if (values && mode === "add") {
       // dispatch(
       //   organizationActions.addParameter(
@@ -237,7 +244,7 @@ const ScheduleForm = (props) => {
                   )}
                 </FormControl>
               </Grid>
-              <Grid item xs={12} md={6}>
+              {/* <Grid item xs={12} md={6}>
                 <TextField
                   fullWidth
                   id="startDate"
@@ -268,6 +275,54 @@ const ScheduleForm = (props) => {
                   className={styles.textField}
                   size="small"
                 />
+              </Grid> */}
+
+              <Grid item xs={12} md={6}>
+                <LocalizationProvider dateAdapter={AdapterDateFns}>
+                  <DatePicker
+                    label="Start Date"
+                    name="startDate"
+                    fullWidth
+                    onChange={(value) =>
+                      setFieldValue("startDate", value, true)
+                    }
+                    value={values.startDate}
+                    renderInput={(params) => (
+                      <TextField
+                        {...params}
+                        className={styles.textField}
+                        size="small"
+                        error={Boolean(touched.startDate && errors.startDate)}
+                        helperText={touched.startDate && errors.startDate}
+                        variant="standard"
+                        fullWidth
+                      />
+                    )}
+                  />
+                </LocalizationProvider>
+              </Grid>
+
+              <Grid item xs={12} md={6}>
+                <LocalizationProvider dateAdapter={AdapterDateFns}>
+                  <DatePicker
+                    label="End Date"
+                    name="endDate"
+                    fullWidth
+                    onChange={(value) => setFieldValue("endDate", value, true)}
+                    value={values.endDate}
+                    renderInput={(params) => (
+                      <TextField
+                        {...params}
+                        className={styles.textField}
+                        size="small"
+                        error={Boolean(touched.endDate && errors.endDate)}
+                        helperText={touched.endDate && errors.endDate}
+                        variant="standard"
+                        fullWidth
+                      />
+                    )}
+                  />
+                </LocalizationProvider>
               </Grid>
 
               <Grid item xs={12}>
