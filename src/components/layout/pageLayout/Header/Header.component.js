@@ -115,6 +115,14 @@ const Header = (props) => {
       pageTitle = "Delivery Schedule";
       break;
 
+    case "/schedule/detail":
+      pageTitle = "Delivery Schedule";
+      break;
+
+    case "/history":
+      pageTitle = "Reservation History";
+      break;
+
     default:
       pageTitle = location?.pathname.replace("/", "");
       break;
@@ -152,7 +160,7 @@ const Header = (props) => {
         sx={{
           pr: "24px", // keep right padding when drawer closed
           pt: 2.5,
-          pb: 2.25,
+          pb: 2.1,
           background: "transparent",
         }}
         elevation={0}
