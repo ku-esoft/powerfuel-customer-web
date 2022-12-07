@@ -10,6 +10,7 @@ const BoxedContent = (props) => {
     moderate,
     backgroundColor,
     children,
+    className,
   } = props;
 
   return (
@@ -23,6 +24,7 @@ const BoxedContent = (props) => {
         },
         backgroundColor: backgroundColor ? backgroundColor : "",
       }}
+      className={className}
     >
       <Grid container maxWidth={"xl"} spacing={0}>
         <Grid
@@ -68,7 +70,7 @@ const BoxedContent = (props) => {
           )}
         </Grid>
 
-        <Grid item xs={12}>
+        <Grid item xs={12} className="boxed-content-children-wrap">
           {children}
         </Grid>
       </Grid>

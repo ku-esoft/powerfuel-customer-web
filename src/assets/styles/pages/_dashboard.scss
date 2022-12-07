@@ -1,0 +1,61 @@
+.dashboard-chart-wrap {
+  border-radius: 0.6rem;
+  margin-bottom: 2.4rem;
+}
+
+.dashboard-chart {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  h1 {
+    font-weight: 400;
+    text-align: center;
+  }
+
+  .remaining {
+    padding: 0.6rem;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 0.3rem;
+    margin: -0.6rem auto 1.2rem auto;
+    font-size: 0.87rem !important;
+    letter-spacing: 0.25px;
+
+    strong {
+      color: $primary;
+    }
+  }
+}
+
+@media (min-width: 992px) {
+  .dashboard-chart-wrap {
+    margin-bottom: 0;
+  }
+
+  .dashboard-chart {
+    .remaining {
+      margin: 0 auto 2.4rem auto;
+    }
+  }
+
+  .dashboard-buttons-wrap {
+    padding-left: 2.4rem !important;
+    height: 100%;
+
+    .MuiGrid-container {
+      height: 100% !important;
+    }
+
+    .boxed-content-children-wrap {
+      height: 100%;
+
+      & > div {
+        height: 100%;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+      }
+    }
+  }
+}

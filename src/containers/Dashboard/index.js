@@ -1,24 +1,9 @@
-import React, { useState, useEffect } from "react";
-import {
-  Link as RouterLink,
-  useParams,
-  useNavigate,
-  Outlet,
-} from "react-router-dom";
-import {
-  Grid,
-  Typography,
-  Box,
-  Stack,
-  InputBase,
-  Button,
-  SvgIcon,
-} from "@mui/material";
-import Intro from "../../components/layout/pageLayout/Intro/Intro.component";
+import React from "react";
+import { Link as RouterLink } from "react-router-dom";
+import { Grid, Stack, Button, SvgIcon } from "@mui/material";
+import { HalfPieChart } from "half-pie-chart";
 import Content from "../../components/layout/pageLayout/Content/Content.component";
 import BoxedContent from "../../components/layout/pageLayout/BoxedContent/BoxedContent.component";
-
-import { Delete } from "@mui/icons-material";
 
 const IconToken = (props) => {
   return (
@@ -115,57 +100,113 @@ const IconHistory = (props) => {
 };
 
 const Dashboard = () => {
+  const chartData = {
+    right: [
+      {
+        value: 20,
+        displayValue: "0",
+        text: "Litres",
+        color: "#D32F2F",
+      },
+    ],
+    left: [
+      {
+        value: 10,
+        displayValue: "30",
+        text: "Litres",
+        color: "#fff",
+      },
+    ],
+  };
+
   return (
     <>
-      <Intro pageTitle="" pageTitleShort="" />
-
       <Content>
         <Grid container spacing="2">
-          <Grid item xs={12}>
-            <BoxedContent title="" subtitle="" description="">
-              content
+          <Grid item xs={12} md={6}>
+            <BoxedContent
+              title=""
+              subtitle=""
+              description=""
+              dense
+              backgroundColor="#21203f"
+              className="dashboard-chart-wrap"
+            >
+              <div className="dashboard-chart">
+                <HalfPieChart
+                  name="fuelQuotaStatus"
+                  right={chartData.right}
+                  left={chartData.left}
+                  dark={true}
+                  title={`Your weekly quota will be reset on 01-12-2022 at 00:00`}
+                  fontStyle="Lato"
+                  cardBackColor="#21203F"
+                />
+
+                <div className="remaining">
+                  Remaining quota:{" "}
+                  <strong>{chartData?.left[0].value} litres</strong>
+                </div>
+              </div>
             </BoxedContent>
+          </Grid>
 
-            <BoxedContent title="" subtitle="" description="">
-              <Button
-                fullWidth
-                variant="contained"
-                component={RouterLink}
-                to="/token"
-                endIcon={<IconToken />}
-              >
-                My Token
-              </Button>
+          <Grid item xs={12} md={6}>
+            <BoxedContent
+              title=""
+              subtitle=""
+              description=""
+              className="dashboard-buttons-wrap"
+              dense
+            >
+              <Stack spacing={2}>
+                <Button
+                  fullWidth
+                  variant="contained"
+                  size="large"
+                  component={RouterLink}
+                  to="/token"
+                  endIcon={<IconToken />}
+                >
+                  My Token
+                </Button>
 
-              <Button
-                fullWidth
-                variant="outlined"
-                component={RouterLink}
-                to="/schedule"
-                endIcon={<IconSchedule />}
-              >
-                View Schedule
-              </Button>
+                <Button
+                  fullWidth
+                  color="default"
+                  variant="outlined"
+                  size="large"
+                  component={RouterLink}
+                  to="/schedule"
+                  endIcon={<IconSchedule />}
+                >
+                  View Schedule
+                </Button>
 
-              <Button
-                fullWidth
-                variant="outlined"
-                component={RouterLink}
-                to="/reserve"
-                endIcon={<IconReservation />}
-              >
-                Make Reservation
-              </Button>
+                <Button
+                  fullWidth
+                  color="default"
+                  variant="outlined"
+                  size="large"
+                  component={RouterLink}
+                  to="/reserve"
+                  endIcon={<IconReservation />}
+                >
+                  Make Reservation
+                </Button>
 
-              <Button
-                fullWidth
-                variant="outlined"
-                component={RouterLink}
-                to="/history"
-                endIcon={<IconHistory />}
-              >
-                Reservation History
-              </Button>
+                <Button
+                  fullWidth
+                  color="default"
+                  variant="outlined"
+                  size="large"
+                  component={RouterLink}
+                  to="/history"
+                  endIcon={<IconHistory />}
+                >
+                  Reservation History
+                </Button>
+              </Stack>
             </BoxedContent>
           </Grid>
         </Grid>

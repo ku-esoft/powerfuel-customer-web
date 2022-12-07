@@ -5167,6 +5167,11 @@ gzip-size@^6.0.0:
   dependencies:
     duplexer "^0.1.2"
 
+half-pie-chart@^1.0.6:
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/half-pie-chart/-/half-pie-chart-1.0.6.tgz#0b55ace8af5460fb3d2a99b3ef0cd4e484916357"
+  integrity sha512-7ZcfqVYsUjU4jcUJfjhG2vGOWZZXj/DZgvgar8H+r40JYgaPt9U10RvknSFPk9XRIWlosXIWQX4BDlKHqjoK9g==
+
 handle-thing@^2.0.0:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/handle-thing/-/handle-thing-2.0.1.tgz#857f79ce359580c340d43081cc648970d0bb234e"
