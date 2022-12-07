@@ -1,5 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import { TimePicker } from "@mui/x-date-pickers/TimePicker";
 // import {
 //   organizationActions,
 //   countryActions,
@@ -31,6 +35,7 @@ import { FieldArray, Form, Formik, getIn } from "formik";
 import * as Yup from "yup";
 import { Link } from "react-router-dom";
 import styles from "./ReservationForm.module.scss";
+import { useNavigate } from "react-router-dom";
 
 const ReservationForm = (props) => {
   const {
@@ -43,6 +48,7 @@ const ReservationForm = (props) => {
   } = props;
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const paramState = useSelector((state) => state.organizations);
   const paymentTermState = useSelector((state) => state.paymentTerms);
   const countryState = useSelector((state) => state.countries);
@@ -58,7 +64,7 @@ const ReservationForm = (props) => {
 
   const validationSchema = Yup.object({
     outlet: Yup.string().required("Fuel Station is required"),
-    date: Yup.string().email().required("Date is required"),
+    date: Yup.string().required("Date is required"),
     time: Yup.string().required("Time is required"),
     amount: Yup.string().required("No. of Litres is required"),
   });
@@ -120,6 +126,7 @@ const ReservationForm = (props) => {
   }, [paramState, handleSuccessDialog, alertState, handleErrorAlert]);
 
   const handleSubmit = (values) => {
+    navigate("/reserve/success");
     if (values && mode === "add") {
       // dispatch(
       //   organizationActions.addParameter(
@@ -237,11 +244,18 @@ const ReservationForm = (props) => {
                     sx={{ height: 40 }}
                     // size="small"
                   >
-                    {countryState?.items?.data.map((item) => (
+                    {/* {countryState?.items?.data.map((item) => (
                       <MenuItem key={item?.id} value={item.id}>
                         {item?.name} ({item?.code})
                       </MenuItem>
-                    ))}
+                    ))} */}
+                    <MenuItem value="1">Bambalapitiya</MenuItem>
+                    <MenuItem value="1">Dehiwala</MenuItem>
+                    <MenuItem value="1">Wellawatta</MenuItem>
+                    <MenuItem value="1">Mount Lavinia</MenuItem>
+                    <MenuItem value="1">Ratmalana</MenuItem>
+                    <MenuItem value="1">Moratuwa</MenuItem>
+                    <MenuItem value="1">Panadura</MenuItem>
                   </Select>
                   {touched.outlet && Boolean(errors.outlet) && (
                     <FormHelperText>
@@ -250,8 +264,61 @@ const ReservationForm = (props) => {
                   )}
                 </FormControl>
               </Grid>
+
               <Grid item xs={12} md={6}>
-                <TextField
+                <LocalizationProvider dateAdapter={AdapterDateFns}>
+                  <DatePicker
+                    label="Date"
+                    name="date"
+                    fullWidth
+                    onChange={(value) => setFieldValue("date", value, true)}
+                    value={values.date}
+                    renderInput={(params) => (
+                      <TextField
+                        {...params}
+                        className={styles.textField}
+                        size="small"
+                        error={Boolean(touched.date && errors.date)}
+                        helperText={touched.date && errors.date}
+                        variant="standard"
+                        fullWidth
+                      />
+                    )}
+                  />
+                </LocalizationProvider>
+              </Grid>
+
+              {/* <Grid item xs={12} md={6}>
+                <FormControl
+                  fullWidth
+                  error={touched.date && Boolean(errors.date)}
+                  sx={{ height: 40 }}
+                >
+                  <InputLabel sx={{ ml: -1.75 }}>Fuel Station</InputLabel>
+                  <LocalizationProvider dateAdapter={AdapterDateFns}>
+                    <DatePicker
+                      onChange={(value) => setFieldValue("date", value, true)}
+                      value={values.date}
+                      className={styles.textField}
+                      size="small"
+                      renderInput={(params) => (
+                        <TextField
+                          error={Boolean(touched.date && errors.date)}
+                          helperText={touched.date && errors.date}
+                          label="Date"
+                          name="date"
+                          fullWidth
+                          variant="standard"
+                          className={styles.textField}
+                          size="small"
+                          {...params}
+                        />
+                      )}
+                    />
+                  </LocalizationProvider>
+                </FormControl>
+
+                {/* <TextField
                   fullWidth
                   id="date"
                   name="date"
@@ -264,10 +331,32 @@ const ReservationForm = (props) => {
                   variant="standard"
                   className={styles.textField}
                   size="small"
-                />
-              </Grid>
+                /> *}
+              </Grid> */}
+
               <Grid item xs={12} md={6}>
-                <TextField
+                <LocalizationProvider dateAdapter={AdapterDateFns}>
+                  <TimePicker
+                    id="time"
+                    name="time"
+                    label="Time"
+                    value={values.time}
+                    onChange={(value) => setFieldValue("time", value, true)}
+                    renderInput={(params) => (
+                      <TextField
+                        {...params}
+                        fullWidth
+                        error={touched.time && Boolean(errors.time)}
+                        helperText={touched.time && errors.time}
+                        variant="standard"
+                        className={styles.textField}
+                        size="small"
+                      />
+                    )}
+                  />
+                </LocalizationProvider>
+
+                {/* <TextField
                   fullWidth
                   id="time"
                   name="time"
@@ -280,7 +369,7 @@ const ReservationForm = (props) => {
                   variant="standard"
                   className={styles.textField}
                   size="small"
-                />
+                /> */}
               </Grid>
 
               <Grid

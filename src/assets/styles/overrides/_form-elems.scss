@@ -1,0 +1,13 @@
+.MuiPopover-root.MuiMenu-root.MuiModal-root {
+  .MuiPaper-root.MuiPaper-rounded.MuiMenu-paper {
+    background: #121212 !important;
+  }
+}
+
+.MuiDialog-root.MuiModal-root {
+  .MuiDialog-container.MuiDialog-scrollPaper {
+    .MuiPaper-root.MuiPaper-rounded.MuiDialog-paper {
+      background: #121212 !important;
+    }
+  }
+}

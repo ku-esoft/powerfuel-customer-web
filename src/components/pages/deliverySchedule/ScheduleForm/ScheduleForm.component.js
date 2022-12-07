@@ -49,7 +49,7 @@ const ScheduleForm = (props) => {
   const alertState = useSelector((state) => state.alert);
   const formikRef = React.createRef();
 
-  const debug = true;
+  const debug = false;
   // const [submitting, setSubmitting] = useState(false);
   const [useSameBillingAddr, setUseSameBillingAddr] = useState(true);
   const [poRequired, setPoRequired] = useState(false);
@@ -217,11 +217,18 @@ const ScheduleForm = (props) => {
                     sx={{ height: 40 }}
                     // size="small"
                   >
-                    {countryState?.items?.data.map((item) => (
+                    {/* {countryState?.items?.data.map((item) => (
                       <MenuItem key={item?.id} value={item.id}>
                         {item?.name} ({item?.code})
                       </MenuItem>
-                    ))}
+                    ))} */}
+                    <MenuItem value="1">Bambalapitiya</MenuItem>
+                    <MenuItem value="1">Dehiwala</MenuItem>
+                    <MenuItem value="1">Wellawatta</MenuItem>
+                    <MenuItem value="1">Mount Lavinia</MenuItem>
+                    <MenuItem value="1">Ratmalana</MenuItem>
+                    <MenuItem value="1">Moratuwa</MenuItem>
+                    <MenuItem value="1">Panadura</MenuItem>
                   </Select>
                   {touched.outlet && Boolean(errors.outlet) && (
                     <FormHelperText>
