@@ -30,7 +30,7 @@ const Token = () => {
     <>
       <Content>
         <Grid container spacing="2">
-          <Grid item xs={12} className="mytoken">
+          <Grid item xs={12} md={6} className="mytoken">
             <BoxedContent
               title=""
               subtitle=""
@@ -42,7 +42,7 @@ const Token = () => {
             </BoxedContent>
           </Grid>
 
-          <Grid item xs={12}>
+          <Grid item xs={12} md={6} className="token-info-wrap">
             <BoxedContent title="" subtitle="" description="" dense>
               <Alert severity="info" className="alert-info">
                 Please produce this token to fuel station staff before pumping
@@ -50,7 +50,15 @@ const Token = () => {
               </Alert>
             </BoxedContent>
 
-            <Divider sx={{ height: "2.4rem", border: "none" }} />
+            <Divider
+              sx={{
+                height: "2.4rem",
+                border: "none",
+                display: {
+                  md: "none",
+                },
+              }}
+            />
 
             <BoxedContent title="" subtitle="" description="" dense>
               <List dense={true} className="list-info">
@@ -72,13 +80,15 @@ const Token = () => {
               </List>
             </BoxedContent>
 
-            <BoxedContent>
+            <BoxedContent dense>
               <Button
                 fullWidth
                 variant="outlined"
+                color="default"
                 component={RouterLink}
                 to="/dashboard"
                 startIcon={<ArrowBack />}
+                sx={{ mt: 2 }}
               >
                 Back
               </Button>

@@ -21,3 +21,21 @@
     padding-right: 0;
   }
 }
+
+@media (min-width: 992px) {
+  .mytoken {
+    margin: 0 !important;
+
+    &::after {
+      left: 0;
+      right: 0;
+    }
+  }
+
+  .token-info-wrap {
+    padding-left: 2.4rem !important;
+    display: flex;
+    flex-direction: column !important;
+    justify-content: space-between;
+  }
+}
