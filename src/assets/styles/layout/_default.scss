@@ -24,3 +24,11 @@ body {
   position: relative;
   z-index: 2;
 }
+
+@media (min-width: 992px) {
+  body {
+    &::before {
+      opacity: 0.2;
+    }
+  }
+}

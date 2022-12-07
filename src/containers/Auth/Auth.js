@@ -32,7 +32,14 @@ const Auth = () => {
           <Card className={styles.card}>
             <CardContent className={styles.cardContent}>
               <Grid container>
-                <Grid item md={5} sx={{ display: { xs: "none", md: "block" } }}>
+                <Grid
+                  item
+                  md={5}
+                  sx={{
+                    display: { xs: "none", md: "block" },
+                    overflow: "hidden",
+                  }}
+                >
                   <img src={cardImage} alt="" className={styles.cardImage} />
                 </Grid>
                 <Grid item md={7} className={styles.outletWrapper}>

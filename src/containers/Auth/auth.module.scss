@@ -71,6 +71,27 @@
   padding: 1.2rem 0;
 }
 
+@media (min-width: 992px) {
+  .logo {
+    max-width: 20rem;
+    margin-bottom: 3.6rem;
+  }
+
+  .cardImage {
+    transform: scale(1.75) translateX(17.5%);
+  }
+
+  .outletWrapper {
+    padding: 2.4rem;
+  }
+
+  .card {
+    background: rgba(256, 256, 256, 0.03) !important;
+    box-shadow: 0 0 0 1px rgba(256, 256, 256, 0.075) !important;
+    backdrop-filter: blur(10px);
+  }
+}
+
 @media (min-width: 1200px) {
   .contentWrapper {
     min-width: 700px;

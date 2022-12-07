@@ -85,6 +85,7 @@ const Login = () => {
   const handleLogin = (values) => {
     if (values.username && values.password) {
       // dispatch(userActions.login(values.username, values.password));
+      navigate("/dashboard");
     }
   };
 
@@ -171,7 +172,7 @@ const Login = () => {
                 container
                 rowSpacing={3}
                 sx={{
-                  marginTop: { xs: "0.5rem" },
+                  marginTop: { xs: "0.5rem", lg: "-1rem" },
                   marginBottom: { xs: "1rem" },
                 }}
               >
@@ -223,7 +224,7 @@ const Login = () => {
                             }}
                             onMouseDown={(e) => e.preventDefault()}
                             edge="end"
-                            sx={{ mr: 1 }}
+                            sx={{ mr: 0 }}
                           >
                             {showPassword ? <VisibilityOff /> : <Visibility />}
                           </IconButton>
@@ -294,7 +295,12 @@ const Login = () => {
         justifyContent="center"
         alignItems="center"
         spacing={1}
-        sx={{ mt: 4 }}
+        sx={{
+          mt: {
+            xs: 4,
+            md: 2,
+          },
+        }}
       >
         <Typography sx={{ fontSize: "0.75rem" }}>New user? </Typography>
         <Button
