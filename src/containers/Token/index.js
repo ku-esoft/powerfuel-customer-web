@@ -17,48 +17,43 @@ import {
   List,
   ListItem,
   ListItemText,
+  Divider,
 } from "@mui/material";
-import QRCode from "react-qr-code";
-import Intro from "../../components/layout/pageLayout/Intro/Intro.component";
+
 import Content from "../../components/layout/pageLayout/Content/Content.component";
 import BoxedContent from "../../components/layout/pageLayout/BoxedContent/BoxedContent.component";
+import QRToken from "../../components/common/token/QRToken/QRToken.component";
 import { ArrowBack } from "@mui/icons-material";
 
 const Token = () => {
   return (
     <>
-      <Intro pageTitle="" pageTitleShort="" />
-
       <Content>
         <Grid container spacing="2">
-          <Grid item xs={12}>
-            <BoxedContent title="" subtitle="" description="">
-              <div
-                style={{
-                  height: "auto",
-                  margin: "0 auto",
-                  maxWidth: 256,
-                  width: "100%",
-                }}
-              >
-                <QRCode
-                  size={256}
-                  style={{ height: "auto", maxWidth: "100%", width: "100%" }}
-                  value={"powerfuel"}
-                  viewBox={`0 0 256 256`}
-                />
-              </div>
+          <Grid item xs={12} className="mytoken">
+            <BoxedContent
+              title=""
+              subtitle=""
+              description=""
+              backgroundColor="#21203f"
+              moderate
+            >
+              <QRToken value="powerfuel" />
             </BoxedContent>
+          </Grid>
 
-            <BoxedContent title="" subtitle="" description="">
-              <Alert severity="info">
+          <Grid item xs={12}>
+            <BoxedContent title="" subtitle="" description="" dense>
+              <Alert severity="info" className="alert-info">
                 Please produce this token to fuel station staff before pumping
                 fuel
               </Alert>
             </BoxedContent>
 
-            <BoxedContent title="" subtitle="" description="">
-              <List dense={true}>
+            <Divider sx={{ height: "2.4rem", border: "none" }} />
+
+            <BoxedContent title="" subtitle="" description="" dense>
+              <List dense={true} className="list-info">
                 <ListItem>
                   <ListItemText primary="Fuel Station" secondary="Ratmalana" />
                 </ListItem>

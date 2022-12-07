@@ -1,0 +1,28 @@
+.list-info {
+  padding: 0;
+
+  li {
+    padding: 0;
+
+    div {
+      display: flex;
+      justify-content: space-between;
+
+      span {
+        display: inline-block;
+        min-width: 7.5rem;
+      }
+
+      p {
+        flex: 1;
+        padding-left: 1.2rem;
+
+        &::before {
+          content: ":";
+          display: inline-block;
+          margin-right: 1.2rem;
+        }
+      }
+    }
+  }
+}

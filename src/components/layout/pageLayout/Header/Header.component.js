@@ -111,6 +111,10 @@ const Header = (props) => {
       pageTitle = "My profile";
       break;
 
+    case "/schedule":
+      pageTitle = "Delivery Schedule";
+      break;
+
     default:
       pageTitle = location?.pathname.replace("/", "");
       break;

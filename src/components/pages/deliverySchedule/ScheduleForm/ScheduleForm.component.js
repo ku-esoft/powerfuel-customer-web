@@ -275,20 +275,20 @@ const ScheduleForm = (props) => {
                     mt: 2,
                   }}
                 >
-                  <Link to="../" style={{ display: "block" }}>
+                  <Link to="/dashboard" style={{ display: "block" }}>
                     <Button
                       size="medium"
                       startIcon={<ArrowBackIcon size="small" />}
                       sx={{ textTransform: "none" }}
                     >
-                      Back to {title}
+                      Back
                     </Button>
                   </Link>
 
                   <span style={{ flex: 1 }}>&nbsp;</span>
 
                   <LoadingButton
-                    color="secondary"
+                    color="primary"
                     variant="contained"
                     fullWidth
                     type="submit"
@@ -302,7 +302,7 @@ const ScheduleForm = (props) => {
                       },
                     }}
                   >
-                    Reserve
+                    Search
                   </LoadingButton>
                 </Stack>
               </Grid>

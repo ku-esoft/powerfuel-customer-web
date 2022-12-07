@@ -1,0 +1,23 @@
+.mytoken {
+  background: $secondary;
+  margin: -2.4rem 0 2.4rem 0 !important;
+  position: relative;
+
+  &::after {
+    content: "";
+    display: block;
+    position: absolute;
+    left: -1.2rem;
+    right: -1.2rem;
+    top: 0;
+    bottom: 0;
+    background: $secondary;
+    z-index: -1;
+  }
+
+  & > .MuiPaper-root {
+    background: transparent;
+    padding-left: 0;
+    padding-right: 0;
+  }
+}

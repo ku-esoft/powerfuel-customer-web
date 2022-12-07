@@ -1,20 +1,5 @@
-import React, { useState, useEffect } from "react";
-import {
-  Link as RouterLink,
-  useParams,
-  useNavigate,
-  Outlet,
-} from "react-router-dom";
-import {
-  Grid,
-  Typography,
-  Box,
-  Stack,
-  InputBase,
-  Button,
-  SvgIcon,
-  Alert,
-} from "@mui/material";
+import React from "react";
+import { Grid, Alert, Divider } from "@mui/material";
 import Intro from "../../components/layout/pageLayout/Intro/Intro.component";
 import Content from "../../components/layout/pageLayout/Content/Content.component";
 import BoxedContent from "../../components/layout/pageLayout/BoxedContent/BoxedContent.component";
@@ -31,14 +16,16 @@ const Schedule = () => {
       <Content>
         <Grid container spacing="2">
           <Grid item xs={12}>
-            <BoxedContent title="" subtitle="" description="">
-              <Alert severity="info">
+            <BoxedContent title="" subtitle="" description="" dense>
+              <Alert severity="info" className="alert-info">
                 This schedule can be changed/cancelled without prior notice. In
                 case of cancellation, only the token holders will be notified.
               </Alert>
             </BoxedContent>
 
-            <BoxedContent>
+            <Divider sx={{ height: "2.4rem", border: "none" }} />
+
+            <BoxedContent title="" subtitle="" description="" dense>
               <ScheduleForm />
             </BoxedContent>
           </Grid>
