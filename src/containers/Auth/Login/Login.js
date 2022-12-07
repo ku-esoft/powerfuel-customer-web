@@ -305,7 +305,7 @@ const Login = () => {
         <Typography sx={{ fontSize: "0.75rem" }}>New user? </Typography>
         <Button
           component={RouterLink}
-          to="/register"
+          to="/auth/register"
           size="small"
           sx={{
             padding: 0,

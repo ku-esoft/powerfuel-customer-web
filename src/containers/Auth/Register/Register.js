@@ -19,6 +19,7 @@ import {
   Alert,
   AlertTitle,
   Fade,
+  Stack,
 } from "@mui/material";
 import {
   Visibility,
@@ -90,7 +91,8 @@ const Register = () => {
 
   const handleSubmit = (values, props) => {
     // props.setSubmitting(true);
-    handleRegister(values);
+    // handleRegister(values);
+    navigate("/auth/login");
   };
 
   const handleRegister = (values) => {
@@ -245,7 +247,7 @@ const Register = () => {
                     fullWidth
                     id="plateNo"
                     name="plateNo"
-                    label="UserplateNo"
+                    label="Plate No."
                     value={values.plateNo}
                     onChange={handleChange}
                     onBlur={handleBlur}
@@ -288,6 +290,7 @@ const Register = () => {
                             }}
                             onMouseDown={(e) => e.preventDefault()}
                             edge="end"
+                            sx={{ mr: 0 }}
                           >
                             {showPassword ? <VisibilityOff /> : <Visibility />}
                           </IconButton>
@@ -320,7 +323,7 @@ const Register = () => {
                       onBlur={handleBlur}
                       variant="standard"
                       required
-                      type={showPassword ? "text" : "password"}
+                      type={showConfirmPassword ? "text" : "password"}
                       autoComplete="off"
                       endAdornment={
                         <InputAdornment position="end">
@@ -331,6 +334,7 @@ const Register = () => {
                               setShowConfirmPassword(!showConfirmPassword);
                             }}
                             onMouseDown={(e) => e.preventDefault()}
+                            sx={{ mr: 0 }}
                             edge="end"
                           >
                             {showConfirmPassword ? (
@@ -354,23 +358,13 @@ const Register = () => {
                     type="submit"
                     size="large"
                     variant="contained"
-                    color="secondary"
+                    color="primary"
                     sx={{ marginTop: "1rem" }}
                     // loading={authentication.loggingIn}
                   >
                     {/* {authentication.loggingIn ? "Signing in" : "Sign in"} */}
+                    Sign Up
                   </LoadingButton>
-                </Grid>
-
-                <Grid item xs={12}>
-                  <Button
-                    component={RouterLink}
-                    to="/auth/forgot-password"
-                    size="small"
-                    sx={{ padding: 0, marginTop: "1rem", fontSize: "0.75rem" }}
-                  >
-                    Forgot password?
-                  </Button>
                 </Grid>
               </Grid>
 
@@ -393,6 +387,35 @@ const Register = () => {
           )}
         </Formik>
       </Box>
+
+      <Stack
+        direction="row"
+        justifyContent="center"
+        alignItems="center"
+        spacing={1}
+        sx={{
+          mt: {
+            xs: 4,
+            md: 2,
+          },
+        }}
+      >
+        <Typography sx={{ fontSize: "0.75rem" }}>
+          Already Registered?
+        </Typography>
+        <Button
+          component={RouterLink}
+          to="/auth/login"
+          size="small"
+          sx={{
+            padding: 0,
+            fontSize: "0.75rem",
+            textAlign: "center",
+          }}
+        >
+          Sign In
+        </Button>
+      </Stack>
     </div>
   );
 };
