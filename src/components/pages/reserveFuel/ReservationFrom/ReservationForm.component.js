@@ -49,7 +49,7 @@ const ReservationForm = (props) => {
   const alertState = useSelector((state) => state.alert);
   const formikRef = React.createRef();
 
-  const debug = true;
+  const debug = false;
   // const [submitting, setSubmitting] = useState(false);
   const [useSameBillingAddr, setUseSameBillingAddr] = useState(true);
   const [poRequired, setPoRequired] = useState(false);
@@ -193,6 +193,24 @@ const ReservationForm = (props) => {
         }) => (
           <Form noValidate autoComplete="off">
             <Grid container spacing={{ xs: 2, sm: 2 }} sx={{ pt: 0, pb: 0 }}>
+              <Grid
+                item
+                xs={12}
+                md={12}
+                sx={{
+                  display: {
+                    xs: "none",
+                    md: "block",
+                  },
+                }}
+              >
+                <Alert severity="warning" className="alert-special">
+                  No. of PETROL litres available to reserve on 01-12-2022 :
+                  &nbsp;
+                  <strong className="highlight">1687 LITRES </strong>
+                </Alert>
+              </Grid>
+
               <Grid item xs={12} md={6}>
                 <FormControl
                   fullWidth
@@ -265,8 +283,24 @@ const ReservationForm = (props) => {
                 />
               </Grid>
 
-              <Grid item xs={12} md={6}>
-                <Alert severity="warning" className="alert-special">
+              <Grid
+                item
+                xs={12}
+                md={6}
+                sx={{
+                  display: {
+                    xs: "block",
+                    md: "none",
+                  },
+                }}
+              >
+                <Alert
+                  severity="warning"
+                  className="alert-special"
+                  sx={{
+                    mt: 2,
+                  }}
+                >
                   No. of PETROL litres available to reserve on 01-12-2022:
                   <br />
                   <br />
