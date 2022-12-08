@@ -28,7 +28,7 @@ const Token = () => {
               backgroundColor="#21203f"
               moderate
             >
-              <QRToken value="powerfuel" />
+              <QRToken value="CBK2011---01/12/2022---0900TO1500---RATMALANA" />
             </BoxedContent>
           </Grid>
 

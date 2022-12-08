@@ -3,6 +3,9 @@ import {
   Grid,
   Alert,
   Divider,
+  List,
+  ListItem,
+  ListItemText,
   Accordion,
   AccordionDetails,
   AccordionSummary,
@@ -67,26 +70,55 @@ const Schedule = () => {
       <Content>
         <Grid container spacing="2">
           <Grid item xs={12}>
-            <BoxedContent title="" subtitle="" description="" dense>
+            <BoxedContent
+              title=""
+              subtitle=""
+              description=""
+              className="accordion-info"
+              dense
+            >
               {records.map((record, i) => (
                 <Accordion
                   expanded={expanded === `panel${i}`}
                   onChange={handleChange(`panel${i}`)}
                   key={i}
+                  square
                 >
                   <AccordionSummary
                     expandIcon={<ExpandMoreIcon />}
                     aria-controls="panel1bh-content"
                     id="panel1bh-header"
+                    sx={{ p: 0 }}
                   >
-                    <Typography>{record?.date}</Typography>
+                    <Typography variant="body2">{record?.date}</Typography>
                   </AccordionSummary>
-                  <AccordionDetails>
-                    <Typography>
-                      Nulla facilisi. Phasellus sollicitudin nulla et quam
-                      mattis feugiat. Aliquam eget maximus est, id dignissim
-                      quam.
-                    </Typography>
+                  <AccordionDetails sx={{ p: 0 }}>
+                    <List dense={true} className="list-info">
+                      <ListItem>
+                        <ListItemText
+                          primary="Fuel Station"
+                          secondary={record?.outlet}
+                        />
+                      </ListItem>
+                      <ListItem>
+                        <ListItemText primary="Date" secondary={record?.date} />
+                      </ListItem>
+                      <ListItem>
+                        <ListItemText primary="Time" secondary={record?.time} />
+                      </ListItem>
+                      <ListItem>
+                        <ListItemText
+                          primary="Quota"
+                          secondary={record?.date}
+                        />
+                      </ListItem>
+                      <ListItem>
+                        <ListItemText
+                          primary="Success"
+                          secondary={record?.status}
+                        />
+                      </ListItem>
+                    </List>
                   </AccordionDetails>
                 </Accordion>
               ))}

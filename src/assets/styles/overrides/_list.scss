@@ -33,6 +33,20 @@
     li {
       div {
         padding: 0 0.6rem;
+
+        p {
+          flex: 2;
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: 1200px) {
+  .accordion-info {
+    .list-info li div {
+      p {
+        flex: 3;
       }
     }
   }

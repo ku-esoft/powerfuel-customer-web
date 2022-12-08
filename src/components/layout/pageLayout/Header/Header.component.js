@@ -67,7 +67,12 @@ const Settings = () => {
         open={Boolean(anchorElUser)}
         onClose={handleCloseUserMenu}
       >
-        <MenuItem onClick={handleCloseUserMenu}>
+        <MenuItem
+          onClick={() => {
+            handleCloseUserMenu();
+            navigate("/profile");
+          }}
+        >
           <Typography textAlign="center">Profile</Typography>
         </MenuItem>
 
