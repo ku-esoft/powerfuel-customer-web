@@ -10,6 +10,9 @@ import Auth from "./containers/Auth/Auth";
 import Login from "./containers/Auth/Login/Login";
 import Register from "./containers/Auth/Register/Register";
 
+// home
+import Home from "./containers/Home";
+
 // protected route
 import ProtectedRoute from "./components/common/auth/ProtectedRoute/ProtectedRoute.component";
 
@@ -54,6 +57,9 @@ const App = (props) => {
           </Route>
 
           <Route path="/" element={<ProtectedRoute />}>
+            {/* hoe */}
+            <Route index element={<Home />} />
+
             {/* dashboard */}
             <Route path="/dashboard" element={<Dashboard />} />
 
