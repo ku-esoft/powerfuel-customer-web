@@ -71,7 +71,7 @@ const ReserveFuelSuccess = () => {
                 to="/dashboard"
                 startIcon={<ArrowBack />}
               >
-                View Schedule
+                Back
               </Button>
             </BoxedContent>
           </Grid>
