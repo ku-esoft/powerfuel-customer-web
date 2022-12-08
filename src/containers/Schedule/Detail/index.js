@@ -1,9 +1,11 @@
 import React from "react";
-import { Grid, Alert, Divider, Typography } from "@mui/material";
+import { Link as RouterLink } from "react-router-dom";
+import { Grid, Button, Divider, Typography } from "@mui/material";
 import Intro from "../../../components/layout/pageLayout/Intro/Intro.component";
 import Content from "../../../components/layout/pageLayout/Content/Content.component";
 import BoxedContent from "../../../components/layout/pageLayout/BoxedContent/BoxedContent.component";
 import ScheduleData from "../../../components/pages/deliverySchedule/ScheduleData/ScheduleData.component";
+import { ArrowBack } from "@mui/icons-material";
 
 const legend = [
   {
@@ -217,14 +219,29 @@ const ScheduleDetail = () => {
               title=""
               subtitle=""
               description=""
-              moderate
               backgroundColor="#21203f"
             >
               <ScheduleData data={legend} />
             </BoxedContent>
 
-            <BoxedContent title="" subtitle="" description="" moderate dense>
+            <Divider sx={{ height: "2.4rem", border: "none" }} />
+
+            <BoxedContent title="" subtitle="" description="" dense>
               <ScheduleData data={data} />
+            </BoxedContent>
+
+            <BoxedContent dense>
+              <Button
+                fullWidth
+                variant="outlined"
+                color="default"
+                component={RouterLink}
+                to="/schedule"
+                startIcon={<ArrowBack />}
+                sx={{ mt: 2 }}
+              >
+                Back
+              </Button>
             </BoxedContent>
           </Grid>
         </Grid>

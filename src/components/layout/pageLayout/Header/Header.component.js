@@ -115,7 +115,7 @@ const Header = (props) => {
       pageTitle = "Delivery Schedule";
       break;
 
-    case "/schedule/detail":
+    case "/schedule/details":
       pageTitle = "Delivery Schedule";
       break;
 

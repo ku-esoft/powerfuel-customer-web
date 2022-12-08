@@ -1,0 +1,46 @@
+.list {
+  display: flex;
+  padding: 0;
+  margin: 0.6rem 0;
+  list-style: none;
+}
+
+.item {
+  display: flex;
+  width: 20%;
+}
+
+.legend {
+  flex-wrap: wrap;
+
+  .item {
+    width: 33.3333%;
+    padding: 0.3rem 0;
+  }
+}
+
+.square {
+  margin-right: 0.1rem !important;
+  font-size: 1rem !important;
+}
+
+.label {
+  line-height: 1.25 !important;
+}
+
+.divider {
+  margin: 1.2rem 0 !important;
+  border-color: rgba(#fff, 0.3) !important;
+}
+
+@media (min-width: 992px) {
+  .legend {
+    flex-wrap: nowrap;
+    justify-content: space-between;
+
+    .item {
+      width: auto;
+      padding: 0;
+    }
+  }
+}
