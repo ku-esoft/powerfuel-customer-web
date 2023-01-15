@@ -49,7 +49,7 @@ const Register = () => {
     dispatch(userActions.logout());
   }, [dispatch]);
 
-  const debug = false;
+  const debug = true;
 
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
@@ -233,9 +233,11 @@ const Register = () => {
     }
   };
 
-  // if (authentication.loggedIn && authentication.user) {
-  //   navigate("./../../dashboard", { replace: true });
-  // }
+  if (alert.type && alert.type === "success") {
+    setTimeout(() => {
+      navigate("./../../Auth/Login", { replace: true });
+    }, 3000);
+  }
 
   return (
     <div>
@@ -462,7 +464,9 @@ const Register = () => {
                     }
                     className={styles.textField}
                   >
-                    <InputLabel htmlFor="confirmPassword">Password</InputLabel>
+                    <InputLabel htmlFor="confirmPassword">
+                      Confirm Password
+                    </InputLabel>
                     <Input
                       fullWidth
                       id="confirmPassword"
