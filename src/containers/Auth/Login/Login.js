@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-// import { userActions } from "../../../actions";
+import { apiConstants } from "../../../constants";
+import { alertActions, userActions } from "../../../actions";
 import { Link as RouterLink, useNavigate } from "react-router-dom";
+import axios from "axios";
 import {
   Grid,
   Box,
@@ -38,15 +40,22 @@ const Login = () => {
   const navigate = useNavigate();
   const formikRef = React.createRef();
 
+  // get token
+  useEffect(() => {
+    getToken();
+  }, []);
+
   // logiut user upon visiting the login page
   useEffect(() => {
-    // dispatch(userActions.logout());
+    dispatch(alertActions.clear());
+    dispatch(userActions.logout());
   }, [dispatch]);
 
   const debug = false;
 
   const [showPassword, setShowpassword] = useState(false);
   const [showErrorMessage, setShowErrorMessage] = useState(true);
+  const [token, setToken] = useState();
 
   const validationSchema = Yup.object({
     username: Yup.string().required("Username is required"),
@@ -77,6 +86,33 @@ const Login = () => {
     updateErrorMessage();
   }, [alert]);
 
+  const getToken = async () => {
+    const url = `${apiConstants.API_URL}/token`;
+    const uname = "auth";
+    const pass = "auth";
+
+    const options = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      url: url,
+      auth: {
+        username: uname,
+        password: pass,
+      },
+      data: ["auth.validate"],
+    };
+
+    axios
+      .request(options)
+      .then(function (response) {
+        console.log(response.data);
+        setToken(response.data.token);
+      })
+      .catch(function (error) {
+        console.error(error);
+      });
+  };
+
   const handleSubmit = (values, props) => {
     // props.setSubmitting(true);
     handleLogin(values);
@@ -84,14 +120,14 @@ const Login = () => {
 
   const handleLogin = (values) => {
     if (values.username && values.password) {
-      // dispatch(userActions.login(values.username, values.password));
-      navigate("/dashboard");
+      dispatch(userActions.login(values.username, values.password, token));
+      // navigate("/dashboard");
     }
   };
 
-  // if (authentication.loggedIn && authentication.user) {
-  //   navigate("./../../dashboard", { replace: true });
-  // }
+  if (authentication.loggedIn && authentication.user) {
+    navigate("./../../dashboard", { replace: true });
+  }
 
   return (
     <div>
@@ -134,7 +170,7 @@ const Login = () => {
               {...(alert.type && showErrorMessage ? { timeout: 500 } : {})}
             >
               <AlertTitle className="alert-title" sx={{ fontSize: "0.8rem" }}>
-                {alert.description}
+                {alert.message}
               </AlertTitle>
             </Fade>
 
@@ -252,7 +288,7 @@ const Login = () => {
                   </LoadingButton>
                 </Grid>
 
-                <Grid item xs={12}>
+                {/* <Grid item xs={12}>
                   <Button
                     component={RouterLink}
                     to="/auth/forgot-password"
@@ -267,7 +303,7 @@ const Login = () => {
                   >
                     Forgot password?
                   </Button>
-                </Grid>
+                </Grid> */}
               </Grid>
 
               {debug && (

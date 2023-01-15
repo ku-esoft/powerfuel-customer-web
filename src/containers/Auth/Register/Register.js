@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-// import { userActions } from "../../../actions";
+import { apiConstants } from "../../../constants";
+import { alertActions, userActions } from "../../../actions";
 import { Link as RouterLink, useNavigate } from "react-router-dom";
+import axios from "axios";
 import {
   Grid,
   Box,
@@ -14,6 +16,8 @@ import {
   InputAdornment,
   IconButton,
   Divider,
+  Select,
+  MenuItem,
   FormHelperText,
   Collapse,
   Alert,
@@ -41,7 +45,8 @@ const Register = () => {
 
   // logiut user upon visiting the login page
   useEffect(() => {
-    // dispatch(userActions.logout());
+    dispatch(alertActions.clear());
+    dispatch(userActions.logout());
   }, [dispatch]);
 
   const debug = false;
@@ -49,12 +54,106 @@ const Register = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [showErrorMessage, setShowErrorMessage] = useState(true);
+  const [token, setToken] = useState();
+  const [vehicleTypes, setVehicleTypes] = useState([]);
+  const [fuelTypes, setFuelTypes] = useState([]);
+
+  // get token
+  useEffect(() => {
+    const getToken = async () => {
+      const url = `${apiConstants.API_URL}/token`;
+      const uname = "guest";
+      const pass = "guest";
+
+      const options = {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        url: url,
+        auth: {
+          username: uname,
+          password: pass,
+        },
+        data: [
+          "districts.list",
+          "cities.list",
+          "fueltypes.list",
+          "vehicletypes.list",
+          "users.add",
+        ],
+      };
+
+      axios
+        .request(options)
+        .then(function (response) {
+          console.log(response.data);
+          setToken(response.data.token);
+        })
+        .catch(function (error) {
+          console.error(error);
+        });
+    };
+
+    getToken();
+  }, []);
+
+  // get token
+  useEffect(() => {
+    const getDetails = async () => {
+      const vt_options = {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + token,
+        },
+        url: `${apiConstants.API_URL}/vehicletypes`,
+      };
+
+      const ft_options = {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + token,
+        },
+        url: `${apiConstants.API_URL}/fueltypes`,
+      };
+
+      axios
+        .request(vt_options)
+        .then(function (response) {
+          console.log(response.data);
+          setVehicleTypes(response.data);
+        })
+        .catch(function (error) {
+          console.error("error");
+        });
+
+      axios
+        .request(ft_options)
+        .then(function (response) {
+          console.log(response.data);
+          setFuelTypes(response.data);
+        })
+        .catch(function (error) {
+          console.error("error");
+        });
+    };
+
+    getDetails();
+  }, [token]);
 
   const validationSchema = Yup.object({
     name: Yup.string().required("Full Name is required"),
-    mobile: Yup.string().required("Mobile Number is required"),
+    nic: Yup.string()
+      .required("National ID Number is required")
+      .min(10)
+      .max(12),
+    address: Yup.string().required("Address is required").max(100),
+    mobile: Yup.string().required("Mobile Number is required").min(10),
     email: Yup.string().email().required("Email is required"),
-    plateNo: Yup.string().required("Plate Number is required"),
+    plateNo: Yup.string().required("Plate Number is required").max(10),
+    chassisNo: Yup.string().required("Chassis Number is required").max(10),
+    vehicleType: Yup.string().required("Vehicle Type is required"),
+    fuelType: Yup.string().required("Fuel Type is required"),
     password: Yup.string().required("Password is required").min(8),
     confirmPassword: Yup.string()
       .required("Confirm Password is required")
@@ -63,9 +162,14 @@ const Register = () => {
 
   const initialValues = {
     name: "",
+    nic: "",
+    address: "",
     mobile: "",
     email: "",
     plateNo: "",
+    chassisNo: "",
+    vehicleType: "",
+    fuelType: "",
     password: "",
     confirmPassword: "",
   };
@@ -91,13 +195,41 @@ const Register = () => {
 
   const handleSubmit = (values, props) => {
     // props.setSubmitting(true);
-    // handleRegister(values);
-    navigate("/auth/login");
+    handleRegister(values);
+    // navigate("/auth/login");
   };
 
   const handleRegister = (values) => {
-    if (values.username && values.password) {
-      // dispatch(userActions.login(values.username, values.password));
+    console.log("🚀 ~ file: Register.js:202 ~ handleRegister ~ values", values);
+    if (
+      values.name &&
+      values.nic &&
+      values.address &&
+      values.mobile &&
+      values.email &&
+      values.plateNo &&
+      values.chassisNo &&
+      values.vehicleType &&
+      values.fuelType &&
+      values.password &&
+      values.confirmPassword
+    ) {
+      dispatch(
+        userActions.addUser(
+          values.name,
+          values.nic,
+          values.address,
+          values.mobile,
+          values.email,
+          values.plateNo,
+          values.chassisNo,
+          values.vehicleType,
+          values.fuelType,
+          values.password,
+          values.confirmPassword,
+          token
+        )
+      );
     }
   };
 
@@ -209,6 +341,42 @@ const Register = () => {
                 <Grid item xs={12}>
                   <TextField
                     fullWidth
+                    id="nic"
+                    name="nic"
+                    label="National ID  Number"
+                    value={values.nic}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    error={touched.nic && Boolean(errors.nic)}
+                    helperText={touched.nic && errors.nic}
+                    variant="standard"
+                    required
+                    autoComplete="nic"
+                    className={styles.textField}
+                  />
+                </Grid>
+
+                <Grid item xs={12}>
+                  <TextField
+                    fullWidth
+                    id="address"
+                    name="address"
+                    label="Address"
+                    value={values.address}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    error={touched.address && Boolean(errors.address)}
+                    helperText={touched.address && errors.address}
+                    variant="standard"
+                    required
+                    autoComplete="address"
+                    className={styles.textField}
+                  />
+                </Grid>
+
+                <Grid item xs={12}>
+                  <TextField
+                    fullWidth
                     id="mobile"
                     name="mobile"
                     label="Mobile Number"
@@ -238,24 +406,6 @@ const Register = () => {
                     variant="standard"
                     required
                     autoComplete="email"
-                    className={styles.textField}
-                  />
-                </Grid>
-
-                <Grid item xs={12}>
-                  <TextField
-                    fullWidth
-                    id="plateNo"
-                    name="plateNo"
-                    label="Plate No."
-                    value={values.plateNo}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    error={touched.plateNo && Boolean(errors.plateNo)}
-                    helperText={touched.plateNo && errors.plateNo}
-                    variant="standard"
-                    required
-                    autoComplete="plateNo"
                     className={styles.textField}
                   />
                 </Grid>
@@ -348,6 +498,110 @@ const Register = () => {
                     />
                     {touched.confirmPassword && errors.confirmPassword && (
                       <FormHelperText>{errors.confirmPassword}</FormHelperText>
+                    )}
+                  </FormControl>
+                </Grid>
+
+                <Grid item xs={12}>
+                  <TextField
+                    fullWidth
+                    id="plateNo"
+                    name="plateNo"
+                    label="Vehicle Plate No."
+                    value={values.plateNo}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    error={touched.plateNo && Boolean(errors.plateNo)}
+                    helperText={touched.plateNo && errors.plateNo}
+                    variant="standard"
+                    required
+                    autoComplete="plateNo"
+                    className={styles.textField}
+                  />
+                </Grid>
+
+                <Grid item xs={12}>
+                  <TextField
+                    fullWidth
+                    id="chassisNo"
+                    name="chassisNo"
+                    label="Vehicle Chassis No."
+                    value={values.chassisNo}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    error={touched.chassisNo && Boolean(errors.chassisNo)}
+                    helperText={touched.chassisNo && errors.chassisNo}
+                    variant="standard"
+                    required
+                    autoComplete="chassisNo"
+                    className={styles.textField}
+                  />
+                </Grid>
+
+                <Grid item xs={12}>
+                  <FormControl
+                    fullWidth
+                    error={touched.vehicleType && Boolean(errors.vehicleType)}
+                    sx={{ height: 40 }}
+                  >
+                    <InputLabel sx={{ ml: -1.75 }}>Vehicle Type</InputLabel>
+                    <Select
+                      fullWidth
+                      id="vehicleType"
+                      name="vehicleType"
+                      label="Vehicle Type"
+                      value={values.vehicleType}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      variant="standard"
+                      className={styles.textField}
+                      sx={{ height: 40 }}
+                      // size="small"
+                    >
+                      {vehicleTypes.map((item) => (
+                        <MenuItem key={item?.id} value={item.id}>
+                          {item?.name}
+                        </MenuItem>
+                      ))}
+                    </Select>
+                    {touched.vehicleType && Boolean(errors.vehicleType) && (
+                      <FormHelperText>
+                        {touched.vehicleType && errors.vehicleType}
+                      </FormHelperText>
+                    )}
+                  </FormControl>
+                </Grid>
+
+                <Grid item xs={12}>
+                  <FormControl
+                    fullWidth
+                    error={touched.fuelType && Boolean(errors.fuelType)}
+                    sx={{ height: 40 }}
+                  >
+                    <InputLabel sx={{ ml: -1.75 }}>Fuel Type</InputLabel>
+                    <Select
+                      fullWidth
+                      id="fuelType"
+                      name="fuelType"
+                      label="Fuel Type"
+                      value={values.fuelType}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      variant="standard"
+                      className={styles.textField}
+                      sx={{ height: 40 }}
+                      // size="small"
+                    >
+                      {fuelTypes.map((item) => (
+                        <MenuItem key={item?.id} value={item.id}>
+                          {item?.name}
+                        </MenuItem>
+                      ))}
+                    </Select>
+                    {touched.fuelType && Boolean(errors.fuelType) && (
+                      <FormHelperText>
+                        {touched.fuelType && errors.fuelType}
+                      </FormHelperText>
                     )}
                   </FormControl>
                 </Grid>
